@@ -1,0 +1,53 @@
+{%extends 'base.html'%}
+
+{%block content%}
+<div class="container mt-5 mb-5">
+{% if not error%}
+    <h5 class="display-5 text-center">Statystyki związane z planem</h5>
+    <div class="row justify-content-center mt-5">
+        <div class="col-12 col-sm-7 col-md-7 col-lg-7 col-xl-7">
+            {{subjectsCountTable|safe}}
+        </div>
+
+        <div class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+            {{classTypeCountTable|safe}}
+            {{first_last_classTable|safe}}
+        </div>
+
+    </div>
+    <form method="POST" class="mt-4 mb-4"> {%csrf_token%}
+        <div class="container">
+          <div class="row justify-content-center my-5">
+            <div class="col-4 col-md-2 col-lg-2 col-xl-2">
+              <input type="text" name="ics" class="form-control rounded-left " placeholder="ICS number">
+            </div>
+      
+            <div class="col-2">
+              <button type="submit" class="btn btn-outline-secondary">Search</button>
+            </div>
+      
+          </div>
+        </div>
+      </form>
+{%endif%}
+
+{%if error%}
+<div class="container-fluid bg-light p-5">
+    <h1 class="display-5">Problem z odczytem</h1>
+    <hr>
+    <p class="lead">Niestety nie udało się ściągnąć twojego harmonogramu, prawdopodobnie twój kod ics wygasł lub podany kod jest błędny. Wpisz kod poniżej, aby mieć dostęp do statystyk</p>
+      <form method="post"> {% csrf_token %}
+          <div class="row justify-content-center">
+            <div class="col-4 col-md-2 col-lg-2 col-xl-2">
+                  <input type="text" name="ics" class="form-control rounded-left" placeholder="koc ICS">
+              </div>
+              <div class="col-2">
+                  <button type="submit" class="btn btn-outline-secondary">odnów</button>
+              </div>
+          </div>
+      </form>
+  </div>
+{%endif%}
+</div>
+
+{%endblock content%}

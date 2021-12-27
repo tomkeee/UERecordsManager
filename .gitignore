@@ -1,0 +1,7 @@
+Dockerfile
+settings.py
+my_env
+__pycache__
+*.ics
+db.sqlite3
+*.csv

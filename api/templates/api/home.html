@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    {% if error%}
+    <div class="container-fluid bg-light my-5 p-5">
+      <h1 class="display-5">Problem z odczytem</h1>
+      <p class="lead">Niestety nie udało się ściągnąć twojego harmonogramu, prawdopodobnie nie podałeś kodu ics lub podany kod jest błędny</p>
+      <hr class="my-4">
+      <h5 class="display-5 text-center">Jak znaleźć kod ICS</h5>
+      <ul class="list-group list-group-numbered mt-5">
+          <li class="list-group-item">Zaloguj się na konto w Wirtualnej Uczelni <a href="https://e-uczelnia.ue.katowice.pl/cas/login"> WU</a></li>
+          <li class="list-group-item">W zakładce ,,Rozkład Zajęć" kliknij ,,Prezentacja harmonogramu zajęć"</li>
+          <li class="list-group-item">przejdź do ,,Eksport planu do kalendarza"</li>
+          <li class="list-group-item">Twój kod ICS to ostatnie numery w linku, np gdy link to https://e-uczelnia.ue.katowice.pl/wsrest/rest/ical/phz/calendarid_99999.ics, wtedy ICS = 99999 </li>
+      </ul>
+    </div>
+    {%endif%}
+
+
+  {%if table%}
+  <h5 class="display-5 text-center my-5">Harmonogram zajęć</h5>
+    {{table|safe}}
+  {%endif%}
+
+<form method="POST" class="mt-4 mb-4"> {%csrf_token%}
+  <div class="container">
+    <div class="row justify-content-center my-5">
+      <div class="col-4 col-md-2 col-lg-2 col-xl-2">
+        <input type="text" name="ics" class="form-control rounded-left " placeholder="ICS number">
+      </div>
+
+      <div class="col-2">
+        <button type="submit" class="btn btn-outline-secondary">Search</button>
+      </div>
+
+    </div>
+  </div>
+</form>
+
+{%endblock%}
