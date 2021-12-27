@@ -2,8 +2,8 @@
 <hr>
 
 Available at: </br>
-WWW uegrafik.herokuapp.com </br>
-DockerHub docker push 66122001/ue:tagname
+<b>WWW : </b> uegrafik.herokuapp.com </br>
+<b>DockerHub : </b> docker push 66122001/ue:tagname
 <hr>
 
 
